@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a036604454f536149b58ea04492f3ff1, type: 3}
-  m_Name: newasset
+  m_Name: Mage5
   m_EditorClassIdentifier: 
-  m_Name: dgd
+  m_Name: Mage5
   m_HP: 5
   m_AttackDamage: 10
   m_MoveSpeed: 5
-  m_Weapon: {fileID: 9045319141519109999, guid: 9a73360c35e44ac4591ab213b7747db9,
+  m_Weapon: {fileID: 7110838212981341172, guid: b662060309b1c384987992e4ae654720,
     type: 3}

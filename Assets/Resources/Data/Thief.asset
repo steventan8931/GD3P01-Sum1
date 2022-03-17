@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a036604454f536149b58ea04492f3ff1, type: 3}
-  m_Name: newwarrior
+  m_Name: Thief
   m_EditorClassIdentifier: 
-  m_Name: newwarrior
+  m_Name: Thief
   m_HP: 5
-  m_AttackDamage: 10
-  m_MoveSpeed: 5
-  m_Weapon: {fileID: 9045319141519109999, guid: 9a73360c35e44ac4591ab213b7747db9,
-    type: 3}
+  m_AttackDamage: 5
+  m_MoveSpeed: 10
+  m_AttackRange: 0
+  m_Weapon: {fileID: 665421410939780893, guid: 260bcabd63d257948b198e13c15f6c48, type: 3}

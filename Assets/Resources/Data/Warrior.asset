@@ -16,5 +16,5 @@ MonoBehaviour:
   m_HP: 5
   m_AttackDamage: 10
   m_MoveSpeed: 5
-  m_Weapon: {fileID: 9045319141519109999, guid: 9a73360c35e44ac4591ab213b7747db9,
-    type: 3}
+  m_AttackRange: 0
+  m_Weapon: {fileID: 579503793436275805, guid: 2fdb430f97b432b42a921f94d4a084d0, type: 3}

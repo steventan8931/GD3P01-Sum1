@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class PlayerCreator : MonoBehaviour
 {
+    //Scriptable Object Data
     public List<PlayerData> m_Data;
-    private PlayerData[] data2;
+    PlayerData[] data2;
+    public GameObject m_DefaultPlayerPrefab;
 
     [ExecuteAlways]
     public void ManagedUpdate()

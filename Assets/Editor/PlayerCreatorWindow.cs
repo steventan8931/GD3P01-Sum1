@@ -20,6 +20,7 @@ public class PlayerCreatorWindow : EditorWindow
     int index = 0;
 
     int m_MaxTotalStats = 20;
+    Vector3 cacheSpawnPos;
 
     [MenuItem("Window/PlayerCreatorWindow")]
     static void init()
@@ -40,6 +41,11 @@ public class PlayerCreatorWindow : EditorWindow
         tempData.m_Weapon = m_Weapon;
 
         return tempData;
+    }
+
+    private void OnEnable()
+    {
+        cacheSpawnPos = Vector3.zero;
     }
 
     private void OnGUI()
@@ -84,11 +90,11 @@ public class PlayerCreatorWindow : EditorWindow
                 AssetDatabase.CreateAsset(ConvertData(), "Assets/Resources/Data/" + m_Name + ".asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
+                //cacheSpawnPos = new Vector3(Random.Range(0, 10), 1, Random.Range(0, 10));
+                //GameObject newObj = Instantiate(m_Manager.GetComponent<PlayerCreator>().m_DefaultPlayerPrefab,cacheSpawnPos,Quaternion.Euler(Vector3.zero));
 
-                GameObject newObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                newObj.AddComponent<PlayerCharacter>();
-                newObj.GetComponent<PlayerCharacter>().m_Data = (PlayerData)AssetDatabase.LoadAssetAtPath("Assets/Resources/Data/" + m_Name + ".asset", typeof(PlayerData));
-
+                //newObj.GetComponent<PlayerCharacter>().m_Data = (PlayerData)AssetDatabase.LoadAssetAtPath("Assets/Resources/Data/" + m_Name + ".asset", typeof(PlayerData));
+                //Instantiate(newObj.GetComponent<PlayerCharacter>().m_Data.m_Weapon, newObj.GetComponent<PlayerCharacter>().m_HandPosition);           
             }
 
         }

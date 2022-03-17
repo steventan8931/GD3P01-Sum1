@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Data: []
+  m_DefaultPlayerPrefab: {fileID: 3078032057067076651, guid: 176aae9e063ce1244bf3cd529fd48d2d,
+    type: 3}
