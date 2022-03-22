@@ -6,6 +6,5 @@ public class Weapon : MonoBehaviour
 {
     public virtual void Attack(Transform _HandPos, PlayerData _Data)
     {
-
     }
 }

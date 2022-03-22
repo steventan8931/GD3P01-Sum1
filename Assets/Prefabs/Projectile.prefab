@@ -93,4 +93,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damage: 0
-  m_MoveSpeed: 10
+  m_MoveSpeed: 20

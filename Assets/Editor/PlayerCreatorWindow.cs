@@ -57,6 +57,11 @@ public class PlayerCreatorWindow : EditorWindow
 
         if (m_Manager)
         {
+            if (!m_Manager.GetComponent<PlayerCreator>())
+            {
+                //Object is not the player creator
+                return;
+            }
             m_Manager.GetComponent<PlayerCreator>().ManagedUpdate();
             CreateDropdown();
             EditorGUI.BeginChangeCheck();
@@ -85,18 +90,20 @@ public class PlayerCreatorWindow : EditorWindow
             m_MoveSpeed = EditorGUILayout.IntSlider("Move Speed:", m_MoveSpeed, 0, 10);
             m_Weapon = (GameObject)EditorGUILayout.ObjectField("Weapon Prefab", m_Weapon, typeof(GameObject), false);
 
-            if (GUILayout.Button("Create New Preset"))
+            if (m_Weapon)
             {
-                AssetDatabase.CreateAsset(ConvertData(), "Assets/Resources/Data/" + m_Name + ".asset");
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
-                //cacheSpawnPos = new Vector3(Random.Range(0, 10), 1, Random.Range(0, 10));
-                //GameObject newObj = Instantiate(m_Manager.GetComponent<PlayerCreator>().m_DefaultPlayerPrefab,cacheSpawnPos,Quaternion.Euler(Vector3.zero));
+                if (m_Weapon.GetComponent<Weapon>())
+                {
+                    if (GUILayout.Button("Create New Preset"))
+                    {
+                        AssetDatabase.CreateAsset(ConvertData(), "Assets/Resources/Data/" + m_Name + ".asset");
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
 
-                //newObj.GetComponent<PlayerCharacter>().m_Data = (PlayerData)AssetDatabase.LoadAssetAtPath("Assets/Resources/Data/" + m_Name + ".asset", typeof(PlayerData));
-                //Instantiate(newObj.GetComponent<PlayerCharacter>().m_Data.m_Weapon, newObj.GetComponent<PlayerCharacter>().m_HandPosition);           
+                    }
+
+                }
             }
-
         }
     }
 
