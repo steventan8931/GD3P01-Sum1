@@ -19,9 +19,6 @@ public class PlayerCreatorWindow : EditorWindow
     //String List display index
     int index = 0;
 
-    int m_MaxTotalStats = 20;
-    Vector3 cacheSpawnPos;
-
     [MenuItem("Window/PlayerCreatorWindow")]
     static void init()
     {
@@ -41,11 +38,6 @@ public class PlayerCreatorWindow : EditorWindow
         tempData.m_Weapon = m_Weapon;
 
         return tempData;
-    }
-
-    private void OnEnable()
-    {
-        cacheSpawnPos = Vector3.zero;
     }
 
     private void OnGUI()
@@ -96,9 +88,21 @@ public class PlayerCreatorWindow : EditorWindow
                 {
                     if (GUILayout.Button("Create New Preset"))
                     {
-                        AssetDatabase.CreateAsset(ConvertData(), "Assets/Resources/Data/" + m_Name + ".asset");
-                        AssetDatabase.SaveAssets();
-                        AssetDatabase.Refresh();
+                        if (DoesClassExist(m_Name))
+                        {
+                            if (EditorUtility.DisplayDialog("Class Already Exists", "A class of this name already exist, do you want to override it?", "Yes", "No"))
+                            {
+                                AssetDatabase.CreateAsset(ConvertData(), "Assets/Resources/Data/" + m_Name + ".asset");
+                                AssetDatabase.SaveAssets();
+                                AssetDatabase.Refresh();
+                            }
+                        }
+                        else
+                        {
+                            AssetDatabase.CreateAsset(ConvertData(), "Assets/Resources/Data/" + m_Name + ".asset");
+                            AssetDatabase.SaveAssets();
+                            AssetDatabase.Refresh();
+                        }
 
                     }
 
@@ -117,6 +121,18 @@ public class PlayerCreatorWindow : EditorWindow
         }
     }
 
+    private bool DoesClassExist(string _Name)
+    {
+        for (int i = 0; i < m_Options.Count; i++)
+        {
+            if (_Name == m_Options[i])
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     private void ResetData()
     {
         //If there is preset is set to none

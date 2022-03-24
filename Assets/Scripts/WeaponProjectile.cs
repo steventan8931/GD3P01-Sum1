@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class WeaponProjectile : MonoBehaviour
 {
+    //Damage of the bullet to the enemy
     public int m_Damage = 0;
+    //Projectile Speed
     public float m_MoveSpeed = 10f;
+    //Timer to increment for destorying the object
     private float m_DecayTimer = 0.0f;
 
     private void Update()

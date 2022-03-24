@@ -21,12 +21,15 @@ public class PlayerCharacter : MonoBehaviour
     //Character Stats
     public int m_CurrentHP = 0;
     public int m_MaxHP = 0;
+
+    //UI 
     public RectTransform m_Canvas;
     public Text m_CurrentHPText;
     public Text m_MaxHpText;
 
     private void Start()
     {
+        //Assign variables
         m_Rigid = GetComponent<Rigidbody>();
         m_MaxHP = m_Data.m_HP;
         m_CurrentHP = m_MaxHP;
@@ -38,52 +41,39 @@ public class PlayerCharacter : MonoBehaviour
     {
         MovePlayer();
         Attack();
-
-        if (m_Attacked)
-        {
-            m_AttackTimer += Time.deltaTime;
-            if (m_AttackTimer > (1) * 0.5f)
-            {
-                m_Attacked = false;
-                m_AttackTimer = 0.0f;
-            }
-        }
     }
 
+    //Controls Character Movement
     private void MovePlayer()
     {
+        //Gets the player input for the x axis
         m_Movement.x = Input.GetAxisRaw("Horizontal");
-        //m_Movement.z = Input.GetAxisRaw("Vertical");
-
+        //Multipley the input with the speed value of the player data
         m_Movement *= m_Data.m_MoveSpeed;
 
-        if (m_Movement.x > 0)
+        if (m_Movement.x > 0) //If the player is moving right
         {
+            //Flip variables to match the direction
             transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
             m_Canvas.localScale = new Vector3(-1, 1, 1);
         }
-        else if (m_Movement.x < 0 )
+        else if (m_Movement.x < 0 ) //If the player is moving left
         {
+            //Flip variables to match the direction
             transform.localRotation = Quaternion.Euler(new Vector3(0, -90, 0));
             m_Canvas.localScale = new Vector3(1, 1, 1);
         }
 
-        //if (m_Movement.z > 0)
-        //{
-        //    transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        //}
-        //else if (m_Movement.z < 0)
-        //{
-        //    transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-        //}
-
+        //Update the players speed
         m_Rigid.velocity = new Vector3(m_Movement.x, m_Rigid.velocity.y, m_Movement.z);
 
         
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //If the player's feet transform is touching the ground
             if (Physics.CheckSphere(m_Feet.position, 0.1f,m_GroundMask))
             {
+                //Makes the player jump
                 m_Rigid.AddForce(Vector3.up * 200);
             }
 
@@ -96,17 +86,38 @@ public class PlayerCharacter : MonoBehaviour
         //Gizmos.DrawSphere(m_HandPosition.position, 3.0f);
     }
 
+    //Checks for player attack
     private void Attack()
     {
+        //If the player clicks LMB and attack is not on cooldown
         if (Input.GetKeyDown(KeyCode.Mouse0) && !m_Attacked)
         {
+            //Plays the weapons attack animation
             m_HandPosition.GetChild(0).GetComponent<Animator>().ResetTrigger("Attack");
             m_HandPosition.GetChild(0).GetComponent<Animator>().SetTrigger("Attack");
+            //Calls the attack function from the weapon object's weapon script
             m_Data.m_Weapon.GetComponent<Weapon>().Attack(m_HandPosition,m_Data);
+            //Set attacked to true
             m_Attacked = true;
+        }
+
+        //If the player has attacked
+        if (m_Attacked)
+        {
+            //Increase the timer
+            m_AttackTimer += Time.deltaTime;
+
+            //If the attack timer is greater than the cooldown
+            if (m_AttackTimer > 0.5f)
+            {
+                //Reset the attack timer
+                m_Attacked = false;
+                m_AttackTimer = 0.0f;
+            }
         }
     }
 
+    //Function to be called by enemies to deal damage to the player, and destroying the player when hp hits 0
     public void TakeDamage(int _Damage)
     {
         if (m_CurrentHP > 1)

@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a036604454f536149b58ea04492f3ff1, type: 3}
-  m_Name: 232
+  m_Name: TankMage
   m_EditorClassIdentifier: 
-  m_Name: 232
-  m_HP: 4
-  m_AttackDamage: 0
-  m_MoveSpeed: 1
-  m_Weapon: {fileID: 665421410939780893, guid: 260bcabd63d257948b198e13c15f6c48, type: 3}
+  m_Name: TankMage
+  m_HP: 7
+  m_AttackDamage: 10
+  m_MoveSpeed: 5
+  m_Weapon: {fileID: 7110838212981341172, guid: b662060309b1c384987992e4ae654720,
+    type: 3}
